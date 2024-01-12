@@ -1,0 +1,246 @@
+
+mysql> create database payroll_service;
+Query OK, 1 row affected (0.05 sec)
+
+mysql> show database;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'database' at line 1
+mysql> show databases;
++-------------------------------+
+| Database                      |
++-------------------------------+
+| bitespeed                     |
+| bitespeeddb                   |
+| cachemanagement               |
+| crazyshoppingdb               |
+| department_db                 |
+| docker                        |
+| ecommerce_website             |
+| ecomwebsite                   |
+| employee_personal_db          |
+| employeecrud                  |
+| employeemicroservice_db       |
+| hibernate                     |
+| ifelseclouddb                 |
+| information_schema            |
+| insurence                     |
+| jdbc                          |
+| lti                           |
+| mealapp                       |
+| mysql                         |
+| onlinebakerysystem            |
+| onlinevehicleparking          |
+| organization_db               |
+| payroll_service               |
+| pcs_calender                  |
+| pcs_calender_prod             |
+| pcs_calender_qa               |
+| pcs_global_db_personaldetails |
+| pcsauth                       |
+| pcsdevdb                      |
+| pcsglobal_db                  |
+| performance_schema            |
+| sakila                        |
+| springaop                     |
+| springapidoctest              |
+| springsecurityjwt             |
+| studentrecord                 |
+| sys                           |
+| test                          |
+| transactionexampledb          |
+| user                          |
+| usertaskmanagement            |
+| world                         |
++-------------------------------+
+42 rows in set (0.09 sec)
+
+mysql> use database payroll_service;
+ERROR 1049 (42000): Unknown database 'database'
+mysql> use payroll_service;
+Database changed
+mysql> create table employee_payroll;
+ERROR 4028 (HY000): A table must have at least one visible column.
+mysql> create table employee_payroll(id number ,name varchar ,salary decimal ,startdate date);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'number ,name varchar ,salary decimal ,startdate date)' at line 1
+mysql> create table employee_payroll(id number ,name varchar2 ,salary decimal ,startdate date);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'number ,name varchar2 ,salary decimal ,startdate date)' at line 1
+mysql> create table employee_payroll(id int ,name varchar2 ,salary decimal ,startdate date);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'varchar2 ,salary decimal ,startdate date)' at line 1
+mysql> create table employee_payroll(id int ,name varchar(20) ,salary decimal(10,2) ,startdate date);
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> insert into employee_payroll(1,'prabhu',15000.23,'10/05/2023');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1,'prabhu',15000.23,'10/05/2023')' at line 1
+mysql> insert into employee_payroll(1,'prabhu',15000.23,10/05/2023););
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1,'prabhu',15000.23,10/05/2023)' at line 1
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1
+mysql> insert into employee_payroll(1,'prabhu',15000.23,10/05/2023);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1,'prabhu',15000.23,10/05/2023)' at line 1
+mysql> insert into employee_payroll(1,'prabhu',15000.23,10-05-2023);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1,'prabhu',15000.23,10-05-2023)' at line 1
+mysql> insert into employee_payroll(1,'prabhu',15000.23,2023-06-05);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1,'prabhu',15000.23,2023-06-05)' at line 1
+mysql> insert into employee_payroll(1,'prabhu',15000.23,'2023-06-05');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1,'prabhu',15000.23,'2023-06-05')' at line 1
+mysql> insert into employee_payroll(1,'prabhu','15000.23','2023-06-05');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1,'prabhu','15000.23','2023-06-05')' at line 1
+mysql> insert into employee_payroll values(1,'prabhu','15000.23','2023-06-05');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> select * from employee_payroll;
++------+--------+----------+------------+
+| id   | name   | salary   | startdate  |
++------+--------+----------+------------+
+|    1 | prabhu | 15000.23 | 2023-06-05 |
++------+--------+----------+------------+
+1 row in set (0.00 sec)
+
+mysql> insert into employee_payroll values(2,'melvin','30000.23','2023-05-05');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into employee_payroll values(3,'kumar','40000.23','2023-06-05');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from employee_payroll;
++------+--------+----------+------------+
+| id   | name   | salary   | startdate  |
++------+--------+----------+------------+
+|    1 | prabhu | 15000.23 | 2023-06-05 |
+|    2 | melvin | 30000.23 | 2023-05-05 |
+|    3 | kumar  | 40000.23 | 2023-06-05 |
++------+--------+----------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select salary from employee_payroll where name=kumar;
+ERROR 1054 (42S22): Unknown column 'kumar' in 'where clause'
+mysql> select salary from employee_payroll where name='kumar';
++----------+
+| salary   |
++----------+
+| 40000.23 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select salary from employee_payroll where startdate between '2023-05-04' and '2023-06-07';
++----------+
+| salary   |
++----------+
+| 15000.23 |
+| 30000.23 |
+| 40000.23 |
++----------+
+3 rows in set (0.00 sec)
+
+mysql> select salary from employee_payroll where startdate between '2023-05-04' and '2023-06-03';
++----------+
+| salary   |
++----------+
+| 30000.23 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select salary from employee_payroll where startdate between '2023-05-04' and '2023-06-07';
++----------+
+| salary   |
++----------+
+| 15000.23 |
+| 30000.23 |
+| 40000.23 |
++----------+
+3 rows in set (0.00 sec)
+
+mysql> alter table employee_payroll setcolumnname=gender;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'setcolumnname=gender' at line 1
+mysql> alter table employee_payroll setcolumnn gender varchar(10);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'setcolumnn gender varchar(10)' at line 1
+mysql> alter table employee_payroll set gender varchar(10);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'set gender varchar(10)' at line 1
+mysql> alter table employee_payroll add gender varchar(10);
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from employee_payroll;
++------+--------+----------+------------+--------+
+| id   | name   | salary   | startdate  | gender |
++------+--------+----------+------------+--------+
+|    1 | prabhu | 15000.23 | 2023-06-05 | NULL   |
+|    2 | melvin | 30000.23 | 2023-05-05 | NULL   |
+|    3 | kumar  | 40000.23 | 2023-06-05 | NULL   |
++------+--------+----------+------------+--------+
+3 rows in set (0.00 sec)
+
+mysql> update employee_payroll  set gender='male' where name='prabhu';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql>
+mysql> update employee_payroll  set gender='male' where name='prabhu'or 'melvin' or 'kumar';
+ERROR 1292 (22007): Truncated incorrect DOUBLE value: 'melvin'
+mysql> update employee_payroll  set gender='male' where name='prabhu or melvin or kumar';
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+mysql> select * from employee_payroll;
++------+--------+----------+------------+--------+
+| id   | name   | salary   | startdate  | gender |
++------+--------+----------+------------+--------+
+|    1 | prabhu | 15000.23 | 2023-06-05 | male   |
+|    2 | melvin | 30000.23 | 2023-05-05 | NULL   |
+|    3 | kumar  | 40000.23 | 2023-06-05 | NULL   |
++------+--------+----------+------------+--------+
+3 rows in set (0.00 sec)
+
+mysql> update employee_payroll  set gender='male' where name='prabhu' or name='melvin' or name='kumar';
+Query OK, 2 rows affected (0.01 sec)
+Rows matched: 3  Changed: 2  Warnings: 0
+
+mysql> select * from employee_payroll;
++------+--------+----------+------------+--------+
+| id   | name   | salary   | startdate  | gender |
++------+--------+----------+------------+--------+
+|    1 | prabhu | 15000.23 | 2023-06-05 | male   |
+|    2 | melvin | 30000.23 | 2023-05-05 | male   |
+|    3 | kumar  | 40000.23 | 2023-06-05 | male   |
++------+--------+----------+------------+--------+
+3 rows in set (0.00 sec)
+
+mysql> select sum(salary) from employee_payroll;
++-------------+
+| sum(salary) |
++-------------+
+|    85000.69 |
++-------------+
+1 row in set (0.01 sec)
+
+mysql> select count(*) from employee_payroll;
++----------+
+| count(*) |
++----------+
+|        3 |
++----------+
+1 row in set (0.01 sec)
+
+mysql> select Max(salary) from employee_payroll;
++-------------+
+| Max(salary) |
++-------------+
+|    40000.23 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select min(salary) from employee_payroll;
++-------------+
+| min(salary) |
++-------------+
+|    15000.23 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select avarage(salary) from employee_payroll;
+ERROR 1305 (42000): FUNCTION payroll_service.avarage does not exist
+mysql> select avg(salary) from employee_payroll;
++--------------+
+| avg(salary)  |
++--------------+
+| 28333.563333 |
++--------------+
+1 row in set (0.00 sec)
